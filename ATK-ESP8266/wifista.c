@@ -132,7 +132,7 @@ PRESTA:
 //					{
 						atk_8266_quit_trans();
 						atk_8266_send_cmd("AT+CIPSEND","OK",20);         //开始透传           
-						sprintf((char*)p,"CONN_1",ATK_ESP8266_WORKMODE_TBL[netpro],t/10);//测试数据
+						sprintf((char*)p,"CONN_LED1",ATK_ESP8266_WORKMODE_TBL[netpro],t/10);//测试数据
 						Show_Str(30+54,100,200,12,p,12,0);
 						u3_printf("%s",p);
 						timex=100;
@@ -147,12 +147,31 @@ PRESTA:
 //						timex=100;
 //					}
 				}
-				else if(key==KEY1_PRES)	//KEY0 发送数据 
+				else if(key==KEY1_PRES)	//KEY1 发送数据 
 				{
 						sprintf((char*)p,"WANG",ATK_ESP8266_WORKMODE_TBL[netpro],t/10);//测试数据
 						Show_Str(30+54,100,200,12,p,12,0);
 						u3_printf("%s",p);
 						timex=100;
+				}
+				else if(key==KEY2_PRES)//KEY2 发送数据 
+				{
+					if(LED1==0)
+					{
+						LED1=1;
+						sprintf((char*)p,"LED1,0",ATK_ESP8266_WORKMODE_TBL[netpro],t/10);//测试数据
+						Show_Str(30+54,100,200,12,p,12,0);
+						u3_printf("%s",p);
+						timex=100;
+					}
+					else
+					{
+						LED1=0;
+						sprintf((char*)p,"LED1,1",ATK_ESP8266_WORKMODE_TBL[netpro],t/10);//测试数据
+						Show_Str(30+54,100,200,12,p,12,0);
+						u3_printf("%s",p);
+						timex=100;
+					}
 				}else;
 			
 				if(timex)timex--;
@@ -171,6 +190,25 @@ PRESTA:
 					POINT_COLOR=BLUE;
 					LCD_Fill(30,130,239,319,WHITE);
 					Show_Str(30,130,180,190,USART3_RX_BUF,12,0);//显示接收到的数据  
+					if(strcmp(USART3_RX_BUF,"LED1")==0)
+					{
+						if(LED1==0)
+						{
+						LED1=1;
+						sprintf((char*)p,"LED1,0",ATK_ESP8266_WORKMODE_TBL[netpro],t/10);//测试数据
+						Show_Str(30+54,100,200,12,p,12,0);
+						u3_printf("%s",p);
+						timex=100;
+						}
+						else
+						{
+						LED1=0;
+						sprintf((char*)p,"LED1,1",ATK_ESP8266_WORKMODE_TBL[netpro],t/10);//测试数据
+						Show_Str(30+54,100,200,12,p,12,0);
+						u3_printf("%s",p);
+						timex=100;
+						}
+					} 	
 					USART3_RX_STA=0;
 					if(constate!='+')t=1000;		//状态为还未连接,立即更新连接状态
 					else t=0;                   //状态为已经连接了,10秒后再检查
