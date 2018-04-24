@@ -19,9 +19,9 @@
 const u8* portnum="10086";		 
 
 //WIFI STA模式,设置要去连接的路由器无线参数,请根据你自己的路由器设置,自行修改.
-const u8* wifista_ssid="2014IOT 1";			//路由器SSID号
+const u8* wifista_ssid="wang";			//路由器SSID号
 const u8* wifista_encryption="wpawpa2_aes";	//wpa/wpa2 aes加密方式
-const u8* wifista_password="iot123456"; 	//连接密码
+const u8* wifista_password="123456789"; 	//连接密码
 
 //WIFI AP模式,模块对外的无线参数,可自行修改.
 const u8* wifiap_ssid="ATK-ESP8266";			//对外SSID号
