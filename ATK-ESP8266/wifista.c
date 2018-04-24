@@ -1,5 +1,7 @@
 #include "common.h"
 #include "stdlib.h"
+#include "adc.h"
+#include "lsens.h"
 /////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 //本程序只供学习使用，未经作者许可，不得用于其它任何用途
 //ALIENTEK STM32开发板
@@ -18,11 +20,55 @@
 //返回值:0,正常
 //    其他,错误代码
 u8 netpro=0;	//网络模式
+char *reverse(char *s)  
+{  
+    char temp;  
+    char *p = s;
+    char *q = s; 
+		while(*q)  
+        ++q;  
+    q--;  
+  
+    //??????,??p?q??  
+    while(q > p)  
+    {  
+        temp = *p;  
+        *p++ = *q;  
+        *q-- = temp;  
+    }  
+    return s;  
+}  
+  
+char *my_itoa(int n)  
+{  
+    int i = 0,isNegative = 0;  
+    static char s[100];     
+    if((isNegative = n) < 0) 
+    {  
+        n = -n;  
+    }  
+    do       
+    {  
+        s[i++] = n%10 + '0';  
+        n = n/10;  
+    }while(n > 0);  
+  
+    if(isNegative < 0)  
+    {  
+        s[i++] = '-';  
+    }  
+    s[i] = '\0';   
+    return reverse(s);    
+}  
+
+
 u8 atk_8266_wifista_test(void)
 {
 	//u8 netpro=0;	//网络模式
 	u8 key;
+	u8 adcx;
 	u8 timex=0; 
+	u8 begin=0;
 	u8 ipbuf[16]; 	//IP缓存
 	u8 *p;
 	u16 t=999;		//加速第一次获取链接状态
@@ -108,6 +154,7 @@ PRESTA:
 			USART3_RX_STA=0;
 			while(1)
 			{
+				adcx=Lsens_Get_Val();   //取得亮度值
 				key=KEY_Scan(0);
 				if(key==WKUP_PRES)			//WK_UP 退出测试		 
 				{ 
@@ -136,6 +183,7 @@ PRESTA:
 						Show_Str(30+54,100,200,12,p,12,0);
 						u3_printf("%s",p);
 						timex=100;
+						begin=1;
 //					}
 //					else    //TCP Server
 //					{
@@ -149,7 +197,7 @@ PRESTA:
 				}
 				else if(key==KEY1_PRES)	//KEY1 发送数据 
 				{
-						sprintf((char*)p,"WANG",ATK_ESP8266_WORKMODE_TBL[netpro],t/10);//测试数据
+					sprintf((char*)p,"1,LED1",ATK_ESP8266_WORKMODE_TBL[netpro],t/10);//测试数据
 						Show_Str(30+54,100,200,12,p,12,0);
 						u3_printf("%s",p);
 						timex=100;
@@ -222,7 +270,19 @@ PRESTA:
 					else Show_Str(30+30,80,200,12,"连接失败",12,0); 	 
 					t=0;
 				}
-				if((t%20)==0)LED0=!LED0;
+				if((t%20)==0)
+				{
+					LED0=!LED0;
+					if(begin==2v)
+					{
+						sprintf((char*)p,my_itoa(adcx),ATK_ESP8266_WORKMODE_TBL[netpro],t/10);//测试数据
+						//Show_Str(30+54,100,200,12,p,12,0);
+						u3_printf("%s",p);
+						timex=100;
+					}
+					
+					
+				}
 				atk_8266_at_response(1);
 			}
 	myfree(SRAMIN,p);		//释放内存 

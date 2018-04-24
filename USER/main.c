@@ -14,6 +14,10 @@
 #include "touch.h"		
 #include "usart3.h"
 #include "common.h" 
+#include "adc.h"
+#include "lsens.h"
+
+
  
 /************************************************
  ALIENTEK STM32F103开发板 扩展实验5
@@ -37,6 +41,7 @@
  	LED_Init();		  			//初始化与LED连接的硬件接口
 	KEY_Init();					//初始化按键
 	LCD_Init();			   		//初始化LCD   
+	 Lsens_Init(); 			//初始化光敏传感器
 	W25QXX_Init();				//初始化W25Q128
 	tp_dev.init();				//初始化触摸屏
 	usart3_init(115200);		//初始化串口3 

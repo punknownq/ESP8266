@@ -54,3 +54,5 @@
 ..\obj\main.o: ..\HARDWARE\USART3\usart3.h
 ..\obj\main.o: ..\ATK-ESP8266\common.h
 ..\obj\main.o: D:\Keil\ARM\ARMCC\Bin\..\include\string.h
+..\obj\main.o: ..\HARDWARE\ADC\adc.h
+..\obj\main.o: ..\HARDWARE\LSENS\lsens.h

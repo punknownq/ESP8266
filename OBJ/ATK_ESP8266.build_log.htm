@@ -22,15 +22,30 @@ Dialog DLL:      TARMSTM.DLL V1.64.0.0
  
 <h2>Project:</h2>
 E:\killWorkspace\ESP8266\USER\ATK_ESP8266.uvprojx
-Project File Date:  04/04/2018
+Project File Date:  04/24/2018
 
 <h2>Output:</h2>
 Build target 'Target 1'
-compiling common.c...
+compiling wifista.c...
+..\ATK-ESP8266\wifista.c(182): warning:  #225-D: the format string ends before this argument
+                                                sprintf((char*)p,"CONN_LED1",ATK_ESP8266_WORKMODE_TBL[netpro],t/10);//测试数据
+..\ATK-ESP8266\wifista.c(200): warning:  #225-D: the format string ends before this argument
+                                        sprintf((char*)p,"1,LED1",ATK_ESP8266_WORKMODE_TBL[netpro],t/10);//测试数据
+..\ATK-ESP8266\wifista.c(210): warning:  #225-D: the format string ends before this argument
+                                                sprintf((char*)p,"LED1,0",ATK_ESP8266_WORKMODE_TBL[netpro],t/10);//测试数据
+..\ATK-ESP8266\wifista.c(218): warning:  #225-D: the format string ends before this argument
+                                                sprintf((char*)p,"LED1,1",ATK_ESP8266_WORKMODE_TBL[netpro],t/10);//测试数据
+..\ATK-ESP8266\wifista.c(241): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "const char *"
+                                        if(strcmp(USART3_RX_BUF,"LED1")==0)
+..\ATK-ESP8266\wifista.c(246): warning:  #225-D: the format string ends before this argument
+                                                sprintf((char*)p,"LED1,0",ATK_ESP8266_WORKMODE_TBL[netpro],t/10);//测试数据
+..\ATK-ESP8266\wifista.c(254): warning:  #225-D: the format string ends before this argument
+                                                sprintf((char*)p,"LED1,1",ATK_ESP8266_WORKMODE_TBL[netpro],t/10);//测试数据
+..\ATK-ESP8266\wifista.c: 7 warnings, 0 errors
 linking...
-Program Size: Code=70054 RO-data=8838 RW-data=648 ZI-data=1095904  
+Program Size: Code=71002 RO-data=8838 RW-data=648 ZI-data=1096000  
 FromELF: creating hex file...
-"..\OBJ\ATK_ESP8266.axf" - 0 Error(s), 0 Warning(s).
+"..\OBJ\ATK_ESP8266.axf" - 0 Error(s), 7 Warning(s).
 
 <h2>Collection of Component include folders:</h2>
   E:\killWorkspace\ESP8266\USER\RTE

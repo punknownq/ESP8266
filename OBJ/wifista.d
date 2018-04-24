@@ -50,3 +50,5 @@
 ..\obj\wifista.o: ..\FATFS\src\ff.h
 ..\obj\wifista.o: ..\FATFS\src\integer.h
 ..\obj\wifista.o: ..\FATFS\src\ffconf.h
+..\obj\wifista.o: ..\HARDWARE\ADC\adc.h
+..\obj\wifista.o: ..\HARDWARE\LSENS\lsens.h
